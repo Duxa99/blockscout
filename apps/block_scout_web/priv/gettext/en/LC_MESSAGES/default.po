@@ -1606,7 +1606,7 @@ msgid "Pool"
 msgstr ""
 
 #, elixir-format
-#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:14
+#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:11
 msgid "Remove My Pool"
 msgstr ""
 
@@ -1863,7 +1863,7 @@ msgstr ""
 
 #:
 #: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:20
-#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:11
+#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:13
 msgid "Become a Candidate"
 msgstr ""
 
