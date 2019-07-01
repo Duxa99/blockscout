@@ -1564,12 +1564,6 @@ msgid "Amount"
 msgstr ""
 
 #, elixir-format
-#: lib/block_scout_web/templates/stakes/_stakes_empty_content.html.eex:14
-#: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:5
-msgid "Become Candidate"
-msgstr ""
-
-#, elixir-format
 #: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:5
 msgid "Block number"
 msgstr ""
@@ -1861,7 +1855,8 @@ msgstr ""
 msgid "here."
 msgstr ""
 
-#:
+#: lib/block_scout_web/templates/stakes/_stakes_empty_content.html.eex:14
+#: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:5
 #: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:20
 #: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:11
 msgid "Become a Candidate"

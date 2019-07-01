@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-become-candidate" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><%= gettext("Become Candidate") %></h5>
+        <h5 class="modal-title"><%= gettext("Become a Candidate") %></h5>
       </div>
       <%= render BlockScoutWeb.CommonComponentsView, "_modal_close_button.html" %>
       <div class="modal-body">
