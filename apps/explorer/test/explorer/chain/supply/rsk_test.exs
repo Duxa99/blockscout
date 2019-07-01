@@ -1,32 +1,29 @@
 defmodule Explorer.Chain.Supply.RSKTest do
   use Explorer.DataCase
 
+  import Mox
+
   alias Explorer.Chain.Supply.RSK
-  alias Explorer.Chain.Wei
+  alias Explorer.ExchangeRates.Token
 
   @coin_address "0x0000000000000000000000000000000001000006"
 
-  defp wei!(value) do
-    {:ok, wei} = Wei.cast(value)
-    wei
-  end
-
   test "total is 21_000_000" do
-    assert RSK.total() == 21_000_000
+    assert Decimal.equal?(RSK.total(), Decimal.new(21_000_000))
   end
 
-  describe "circulating/0" do
-    test "with no balance" do
-      assert RSK.circulating() == wei!(0)
-    end
+  describe "market_cap/1" do
+    @tag :no_parity
+    @tag :no_geth
+    test "calculates market_cap" do
+      EthereumJSONRPC.Mox
+      |> expect(:json_rpc, fn [%{id: id, method: "eth_getBalance"}], _options ->
+        {:ok, [%{id: id, result: "20999999999900000000000000"}]}
+      end)
 
-    test "with a balance" do
-      address = insert(:address, hash: @coin_address)
-      insert(:block, number: 0)
+      exchange_rate = %{Token.null() | usd_value: Decimal.new(1_000_000)}
 
-      insert(:fetched_balance, value: 10, address_hash: address.hash, block_number: 0)
-
-      assert RSK.circulating() == wei!(10)
+      assert Decimal.equal?(RSK.market_cap(exchange_rate), Decimal.new(100.0000))
     end
   end
 
@@ -47,9 +44,9 @@ defmodule Explorer.Chain.Supply.RSKTest do
       assert RSK.supply_for_days(2) ==
                {:ok,
                 %{
-                  date(now, days: -2) => dec(0),
-                  date(now, days: -1) => dec(0),
-                  date(now) => dec(0)
+                  date(now, days: -2) => dec(21_000_000),
+                  date(now, days: -1) => dec(21_000_000),
+                  date(now) => dec(21_000_000)
                 }}
     end
 
@@ -64,9 +61,9 @@ defmodule Explorer.Chain.Supply.RSKTest do
       assert RSK.supply_for_days(2) ==
                {:ok,
                 %{
-                  date(now, days: -2) => dec(10),
-                  date(now, days: -1) => dec(10),
-                  date(now) => dec(10)
+                  date(now, days: -2) => dec(20_999_990),
+                  date(now, days: -1) => dec(20_999_990),
+                  date(now) => dec(20_999_990)
                 }}
     end
 
@@ -84,9 +81,9 @@ defmodule Explorer.Chain.Supply.RSKTest do
       assert RSK.supply_for_days(2) ==
                {:ok,
                 %{
-                  date(now, days: -2) => dec(10),
-                  date(now, days: -1) => dec(20),
-                  date(now) => dec(20)
+                  date(now, days: -2) => dec(20_999_990),
+                  date(now, days: -1) => dec(20_999_980),
+                  date(now) => dec(20_999_980)
                 }}
     end
 
@@ -107,9 +104,9 @@ defmodule Explorer.Chain.Supply.RSKTest do
       assert RSK.supply_for_days(2) ==
                {:ok,
                 %{
-                  date(now, days: -2) => dec(10),
-                  date(now, days: -1) => dec(20),
-                  date(now) => dec(20)
+                  date(now, days: -2) => dec(20_999_990),
+                  date(now, days: -1) => dec(20_999_980),
+                  date(now) => dec(20_999_980)
                 }}
     end
 
@@ -130,9 +127,9 @@ defmodule Explorer.Chain.Supply.RSKTest do
       assert RSK.supply_for_days(2) ==
                {:ok,
                 %{
-                  date(now, days: -2) => dec(10),
-                  date(now, days: -1) => dec(20),
-                  date(now) => dec(30)
+                  date(now, days: -2) => dec(20_999_990),
+                  date(now, days: -1) => dec(20_999_980),
+                  date(now) => dec(20_999_970)
                 }}
     end
   end
