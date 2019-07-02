@@ -68,6 +68,7 @@
 - [#2270](https://github.com/poanetwork/blockscout/pull/2270) - Remove duplicate params in `Indexer.Fetcher.TokenBalance`
 - [#2268](https://github.com/poanetwork/blockscout/pull/2268) - remove not existing assigns in html code
 - [#2276](https://github.com/poanetwork/blockscout/pull/2276) - remove port in docs
+- [#2258](https://github.com/poanetwork/blockscout/pull/2258) - reduce BlocksTransactionsMismatch memory footprint
 
 ### Chore
 - [#2127](https://github.com/poanetwork/blockscout/pull/2127) - use previouse chromedriver version
