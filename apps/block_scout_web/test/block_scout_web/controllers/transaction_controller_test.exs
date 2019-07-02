@@ -6,6 +6,13 @@ defmodule BlockScoutWeb.TransactionControllerTest do
 
   alias Explorer.Chain.Transaction
 
+  setup do
+    Supervisor.terminate_child(Explorer.Supervisor, {ConCache, :transactions})
+    Supervisor.restart_child(Explorer.Supervisor, {ConCache, :transactions})
+
+    :ok
+  end
+
   describe "GET index/2" do
     test "returns a collated transactions", %{conn: conn} do
       :transaction

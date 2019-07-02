@@ -12,6 +12,8 @@ defmodule BlockScoutWeb.ViewingChainTest do
   setup do
     Supervisor.terminate_child(Explorer.Supervisor, {ConCache, :blocks})
     Supervisor.restart_child(Explorer.Supervisor, {ConCache, :blocks})
+    Supervisor.terminate_child(Explorer.Supervisor, {ConCache, :transactions})
+    Supervisor.restart_child(Explorer.Supervisor, {ConCache, :transactions})
 
     Enum.map(401..404, &insert(:block, number: &1))
 

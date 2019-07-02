@@ -5,6 +5,13 @@ defmodule BlockScoutWeb.RecentTransactionsControllerTest do
 
   alias Explorer.Chain.Hash
 
+  setup do
+    Supervisor.terminate_child(Explorer.Supervisor, {ConCache, :transactions})
+    Supervisor.restart_child(Explorer.Supervisor, {ConCache, :transactions})
+
+    :ok
+  end
+
   describe "GET index/2" do
     test "returns a transaction", %{conn: conn} do
       transaction =

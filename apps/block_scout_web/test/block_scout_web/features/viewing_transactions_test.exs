@@ -7,6 +7,9 @@ defmodule BlockScoutWeb.ViewingTransactionsTest do
   alias Explorer.Chain.Wei
 
   setup do
+    Supervisor.terminate_child(Explorer.Supervisor, {ConCache, :transactions})
+    Supervisor.restart_child(Explorer.Supervisor, {ConCache, :transactions})
+
     block =
       insert(:block, %{
         timestamp: Timex.now() |> Timex.shift(hours: -2),
