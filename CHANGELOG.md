@@ -69,6 +69,7 @@
 - [#2268](https://github.com/poanetwork/blockscout/pull/2268) - remove not existing assigns in html code
 - [#2276](https://github.com/poanetwork/blockscout/pull/2276) - remove port in docs
 - [#2258](https://github.com/poanetwork/blockscout/pull/2258) - reduce BlocksTransactionsMismatch memory footprint
+- [#2267](https://github.com/poanetwork/blockscout/pull/2267) - Modify implementation of `where_transaction_has_multiple_internal_transactions`
 
 ### Chore
 - [#2127](https://github.com/poanetwork/blockscout/pull/2127) - use previouse chromedriver version
